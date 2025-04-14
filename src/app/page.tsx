@@ -1,12 +1,13 @@
-"use client";
-
-import Button from "@/components/Button";
+// app/page.tsx
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Home() {
   return (
-    <>
-      <h1>컴포넌트 테스트 연습하기</h1>
-      <Button onClick={() => alert("버튼 클릭")}>버튼</Button>
-    </>
+    <ThemeProvider>
+      <main className="flex min-h-screen flex-col items-center justify-center p-24">
+        <ThemeToggle />
+      </main>
+    </ThemeProvider>
   );
 }
