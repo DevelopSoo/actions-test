@@ -1,56 +1,66 @@
 "use client";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const useFetchPosts = () => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["posts"],
-    queryFn: async () => {
-      const res = await fetch("/api/posts");
-      if (!res.ok) {
-        throw new Error("데이터 패치 실패");
-      }
-      return res.json();
-    },
-  });
-
-  return { data, isLoading, error };
-};
-
-export const useCreatePost = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (post: { title: string; content: string }) => {
-      const res = await fetch("/api/posts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(post),
-      });
-      if (!res.ok) {
-        throw new Error("데이터 추가 실패");
-      }
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
-  });
+type Post = {
+  id: number;
+  title: string;
+  content: string;
 };
 
 export default function Home() {
-  const { data, isLoading, error } = useFetchPosts();
-  const { mutate, isPending } = useCreatePost();
+  const [data, setData] = useState<Post[]>([]);
+  const [isPending, setIsPending] = useState(false);
+
   const [values, setValues] = useState({ title: "", content: "" });
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (error) return <div>에러 발생: {error.message}</div>;
+  useEffect(() => {
+    const fetchPosts = async () => {
+      // try catch 문도 추가하면 좋겠네요.
+      const res = await fetch("/api/posts");
+      if (!res.ok) {
+        alert("게시물 데이터 요청 실패");
+        return;
+      }
+      const data = await res.json();
+      setData(data);
+    };
 
-  const handleSubmit = (e: React.FormEvent) => {
+    fetchPosts();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    mutate(values, {
-      onSuccess: () => setValues({ title: "", content: "" }),
+    setIsPending(true);
+    const newPost = {
+      title: values.title,
+      content: values.content,
+    };
+    const res = await fetch("/api/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newPost),
     });
+    if (!res.ok) {
+      alert("게시물 추가 실패");
+      return;
+    }
+    const newData = await res.json();
+    setData([...data, newData]);
+    setValues({ title: "", content: "" });
+    setIsPending(false);
+  };
+
+  const handleDelete = async (id: number) => {
+    const res = await fetch(`/api/posts/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (!res.ok) {
+      alert("게시물 삭제 실패");
+      return;
+    }
+    setData(data.filter((post) => post.id !== id));
   };
 
   return (
@@ -87,6 +97,12 @@ export default function Home() {
           <li key={post.id} className="border-b py-2">
             <h2 className="text-xl font-semibold">제목: {post.title}</h2>
             <p className="text-sm text-gray-600">내용: {post.content}</p>
+            <button
+              className="bg-red-500 text-white p-2 rounded-md"
+              onClick={() => handleDelete(post.id)}
+            >
+              삭제
+            </button>
           </li>
         ))}
       </ul>

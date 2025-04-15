@@ -2,7 +2,7 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import useFetch from "./useFetch";
 import { INITIAL_POSTS } from "@/mocks/handlers/posts";
-import { server } from "@/mocks";
+import { server } from "@/mocks/server";
 import { http, HttpResponse } from "msw";
 
 describe("useFetch 훅 테스트", () => {
