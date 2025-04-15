@@ -6,7 +6,13 @@ import { useState } from "react";
 export const useFetchPosts = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["posts"],
-    queryFn: () => fetch("/api/posts").then((res) => res.json()),
+    queryFn: async () => {
+      const res = await fetch("/api/posts");
+      if (!res.ok) {
+        throw new Error("데이터 패치 실패");
+      }
+      return res.json();
+    },
   });
 
   return { data, isLoading, error };
@@ -15,12 +21,17 @@ export const useFetchPosts = () => {
 export const useCreatePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (post: { title: string; content: string }) =>
-      fetch("/api/posts", {
+    mutationFn: async (post: { title: string; content: string }) => {
+      const res = await fetch("/api/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(post),
-      }).then((res) => res.json()),
+      });
+      if (!res.ok) {
+        throw new Error("데이터 추가 실패");
+      }
+      return res.json();
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
     },

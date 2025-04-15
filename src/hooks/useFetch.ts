@@ -16,6 +16,10 @@ function useFetch<T>(url: string): FetchState<T> {
     const fetchData = async () => {
       try {
         const response = await fetch(url);
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Network error");
+        }
         const json = await response.json();
         setData(json);
         setLoading(false);
