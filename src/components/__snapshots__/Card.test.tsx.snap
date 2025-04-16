@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card 컴포넌트가 정보를 올바르게 표시합니다 1`] = `
+<div>
+  <div
+    class="bg-white rounded-lg p-4 shadow-md"
+  >
+    <h2
+      class="text-lg font-bold"
+    >
+      제목
+    </h2>
+    <p
+      class="text-sm text-gray-600"
+    >
+      설명
+    </p>
+    <img
+      alt="제목"
+      class="w-full h-40 object-cover"
+      src="https://example.com/image.jpg"
+    />
+  </div>
+</div>
+`;
