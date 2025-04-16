@@ -3,6 +3,7 @@ import { NextRequest } from "next/server";
 import { POSTS } from "./_data/mockPosts";
 
 export async function GET() {
+  console.log("GET");
   return Response.json(POSTS);
 }
 
@@ -24,6 +25,8 @@ export async function POST(request: NextRequest) {
     title: newPost.title,
     content: newPost.content,
   };
+  console.log({ postWithId });
   POSTS.push(postWithId);
+  console.log({ POSTS });
   return Response.json(postWithId, { status: 201 });
 }

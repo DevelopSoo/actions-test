@@ -13,6 +13,7 @@ const config: Config = {
   testEnvironment: "jest-fixed-jsdom",
   // Add more setup options before each test is run
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  testPathIgnorePatterns: ["<rootDir>/tests/", "<rootDir>/tests-examples/"],
   coverageThreshold: {
     global: {
       statements: 80,

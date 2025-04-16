@@ -94,7 +94,7 @@ export default function Home() {
 
       <ul>
         {data?.map((post: { id: number; title: string; content: string }) => (
-          <li key={post.id} className="border-b py-2">
+          <li key={post.id} className="border-b py-2" data-testid="post">
             <h2 className="text-xl font-semibold">제목: {post.title}</h2>
             <p className="text-sm text-gray-600">내용: {post.content}</p>
             <button
