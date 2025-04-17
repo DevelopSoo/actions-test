@@ -7,6 +7,9 @@ name: Github Actions 연습하기
 on:
   push:
     branches:
+      - main
+  pull_request:
+    branches:
       - "**"
 
 # 하나의 Workflow는 1개 이상의 Job으로 구성된다.
