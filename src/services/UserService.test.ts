@@ -81,9 +81,4 @@ describe("설정 코드 분리 테스트", () => {
     const data = localStorage.getItem("user");
     expect(data).toBe("안녕");
   });
-
-  test("상품 데이터 조회 테스트", async () => {
-    const data = localStorage.getItem("user");
-    expect(data).toBe("안녕");
-  });
 });
