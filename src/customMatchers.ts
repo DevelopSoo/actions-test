@@ -5,7 +5,6 @@ const customMatchers = {
     email: string;
   }) => {
     if (!received || typeof received !== "object") {
-      console.log("올바른 유저 객체를 전달해주세요.");
       return {
         pass: false,
         message: () => "올바른 유저 객체를 전달해주세요.",
