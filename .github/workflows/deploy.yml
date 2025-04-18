@@ -13,15 +13,20 @@ on:
     branches:
       - "**"
 
+# PR에 댓글을 달려면 권한 설정 필요
+permissions:
+  pull-requests: write
+
 # concurrency 설정 추가
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }} # 워크플로우 이름과 브랜치 이름을 그룹으로 묶어서 실행
   cancel-in-progress: true # 이미 실행 중인 이전 워크플로우를 취소합니다
 
 # 하나의 Workflow는 1개 이상의 Job으로 구성된다.
 # 여러 Job은 기본적으로 병렬적으로 수행된다.
 jobs:
   # Job을 식별하기 위한 id -> 이름은 자유롭게 작성
+
   my-job:
     # Github Actions를 실행시킬 서버 종류 선택
     runs-on: ubuntu-latest
@@ -29,6 +34,13 @@ jobs:
     # Step : 특정 작업을 수행하는 가장 작은 단위
     # Job은 여러 Step들로 구성되어 있다.
     steps:
+      - name: PR에 코멘트를 추가하겠습니다.
+        # main 브랜치가 아닐 때만 이 단계 실행
+        if: github.ref != 'refs/heads/main'
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} --body "안녕하세요! PR을 검토하겠습니다. 👋"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: 테스트
       #   run: echo "Hello, World!"
       - name: Github Repository 파일 가져오기
@@ -45,5 +57,5 @@ jobs:
       - name: 테스트 실행하기
         run: npm run test
 
-      # - name: 빌드하기
-      #   run: npm run build
+      - name: 빌드하기
+        run: npm run build
