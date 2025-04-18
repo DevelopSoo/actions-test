@@ -1,0 +1,10 @@
+/node_modules
+/public
+.storybook
+/coverage
+.next
+.husky
+.swc
+/package-lock.json
+/build
+/dist
