@@ -9,6 +9,7 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const config: Config = {
   coverageProvider: "v8",
+  coverageReporters: ["json", "text", "lcov", "clover", "json-summary"],
   // testEnvironment: "jsdom",
   testEnvironment: "jest-fixed-jsdom",
   // Add more setup options before each test is run
