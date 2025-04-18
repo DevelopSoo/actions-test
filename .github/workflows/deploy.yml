@@ -13,6 +13,11 @@ on:
     branches:
       - "**"
 
+# concurrency 설정 추가
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true # 이미 실행 중인 이전 워크플로우를 취소합니다
+
 # 하나의 Workflow는 1개 이상의 Job으로 구성된다.
 # 여러 Job은 기본적으로 병렬적으로 수행된다.
 jobs:
@@ -24,6 +29,8 @@ jobs:
     # Step : 특정 작업을 수행하는 가장 작은 단위
     # Job은 여러 Step들로 구성되어 있다.
     steps:
+      # - name: 테스트
+      #   run: echo "Hello, World!"
       - name: Github Repository 파일 가져오기
         uses: actions/checkout@v4
 
@@ -38,5 +45,5 @@ jobs:
       - name: 테스트 실행하기
         run: npm run test
 
-      - name: 빌드하기
-        run: npm run build
+      # - name: 빌드하기
+      #   run: npm run build
