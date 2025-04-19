@@ -1,5 +1,5 @@
 // TodoItem.jsx
-"use client";
+'use client';
 function TodoItem({
   todo,
   onToggle,
@@ -14,7 +14,7 @@ function TodoItem({
   onDelete: (id: number) => void;
 }) {
   return (
-    <div className="flex items-center p-2 border-b">
+    <div className="flex items-center border-b p-2">
       <input
         type="checkbox"
         checked={todo.completed}
@@ -23,14 +23,14 @@ function TodoItem({
       />
       <span
         className={`flex-1 ${
-          todo.completed ? "line-through text-gray-500" : ""
+          todo.completed ? 'text-gray-500 line-through' : ''
         }`}
       >
         {todo.text}
       </span>
       <button
         onClick={() => onDelete(todo.id)}
-        className="ml-2 px-2 py-1 bg-red-500 text-white rounded"
+        className="ml-2 rounded bg-red-500 px-2 py-1 text-white"
       >
         삭제
       </button>

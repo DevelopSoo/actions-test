@@ -1,7 +1,7 @@
 // contexts/AuthContext.tsx
-"use client";
+'use client';
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface AuthContextType {
   isAuthenticated: boolean;
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth는 AuthProvider 내부에서 사용되어야 합니다.");
+    throw new Error('useAuth는 AuthProvider 내부에서 사용되어야 합니다.');
   }
   return context;
 };

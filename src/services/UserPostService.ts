@@ -1,4 +1,4 @@
-import { getUser } from "./UserService";
+import { getUser } from './UserService';
 
 export async function getUserPosts(userId: number) {
   const user = await getUser(userId);
@@ -7,8 +7,8 @@ export async function getUserPosts(userId: number) {
   return [
     {
       id: 1,
-      title: "Post 1",
-      body: "Body 1",
+      title: 'Post 1',
+      body: 'Body 1',
       userId: user.id,
       name: user.name,
     },

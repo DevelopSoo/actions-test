@@ -1,5 +1,5 @@
 // hooks/useFetch.ts
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 interface FetchState<T> {
   data: T | null;
@@ -18,7 +18,7 @@ function useFetch<T>(url: string): FetchState<T> {
         const response = await fetch(url);
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error(errorData.message || "Network error");
+          throw new Error(errorData.message || 'Network error');
         }
         const json = await response.json();
         setData(json);

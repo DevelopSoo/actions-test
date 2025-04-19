@@ -1,9 +1,9 @@
 // /src/app/api/posts/route.ts
-import { NextRequest } from "next/server";
-import { POSTS } from "./_data/mockPosts";
+import { NextRequest } from 'next/server';
+import { POSTS } from './_data/mockPosts';
 
 export async function GET() {
-  console.log("GET");
+  console.log('GET');
   return Response.json(POSTS);
 }
 
@@ -11,11 +11,11 @@ export async function POST(request: NextRequest) {
   const newPost = await request.json();
 
   if (
-    typeof newPost.title !== "string" ||
-    typeof newPost.content !== "string"
+    typeof newPost.title !== 'string' ||
+    typeof newPost.content !== 'string'
   ) {
     return Response.json(
-      { error: "제목과 내용은 문자열이어야 합니다." },
+      { error: '제목과 내용은 문자열이어야 합니다.' },
       { status: 400 }
     );
   }

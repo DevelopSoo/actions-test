@@ -10,8 +10,8 @@ export default function SnapshotButton({
   return (
     <button
       className={`bg-blue-500 ${
-        disabled ? "opacity-50 cursor-not-allowed" : ""
-      } ${isLoading ? "animate-pulse" : ""}`}
+        disabled ? 'cursor-not-allowed opacity-50' : ''
+      } ${isLoading ? 'animate-pulse' : ''}`}
     >
       {children}
     </button>

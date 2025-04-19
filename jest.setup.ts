@@ -1,6 +1,6 @@
-import "@testing-library/jest-dom";
-import "@/customMatchers";
-import { server } from "@/mocks/server";
+import '@testing-library/jest-dom';
+import '@/customMatchers';
+import { server } from '@/mocks/server';
 
 beforeAll(() => server.listen());
 afterEach(() => {

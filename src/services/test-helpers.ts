@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export function setupLocalStorageMock() {
   const localStorageMock = {
@@ -17,7 +17,7 @@ export function setupLocalStorageMock() {
     }),
   };
 
-  Object.defineProperty(window, "localStorage", {
+  Object.defineProperty(window, 'localStorage', {
     value: localStorageMock,
     writable: true,
   });
@@ -27,15 +27,15 @@ export function setupLocalStorageMock() {
 export function createUser(overrides = {}) {
   return {
     id: 1,
-    name: "김철수",
-    email: "kim@example.com",
+    name: '김철수',
+    email: 'kim@example.com',
     ...overrides,
   };
 }
 
 export const axiosMock = axios as jest.Mocked<typeof axios>;
 
-export function mockLoginSuccess(user = createUser(), token = "fake-token") {
+export function mockLoginSuccess(user = createUser(), token = 'fake-token') {
   axiosMock.post.mockResolvedValue({
     data: {
       user,
@@ -51,7 +51,7 @@ export function mockLoginFailure() {
   axiosMock.post.mockRejectedValue({
     response: {
       status: 401,
-      data: { message: "잘못된 로그인 정보입니다" },
+      data: { message: '잘못된 로그인 정보입니다' },
     },
   });
 }

@@ -2,14 +2,14 @@
  * 날짜를 YYYY-MM-DD 형식의 문자열로 포맷팅합니다.
  * separator에 따라 포맷 방식이 달라질 수 있습니다.
  */
-export function formatDate(date: Date, separator = "-") {
+export function formatDate(date: Date, separator = '-') {
   if (!(date instanceof Date) || isNaN(date.getTime())) {
-    return "";
+    return '';
   }
 
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
 
   return `${year}${separator}${month}${separator}${day}`;
 }

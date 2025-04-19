@@ -1,6 +1,6 @@
 // 문자열의 첫 글자를 대문자로 변환하고, 나머지는 소문자로 변환하는 함수
 export function capitalize(str: string) {
-  if (!str) return "";
+  if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
@@ -8,9 +8,9 @@ export function capitalize(str: string) {
 export function truncate(
   str: string,
   maxLength: number,
-  suffix: string = "..."
+  suffix: string = '...'
 ) {
-  if (!str) return "";
+  if (!str) return '';
   if (str.length <= maxLength) return str;
   // 0부터 maxLength 까지 자르고 suffix를 추가
   return str.slice(0, maxLength) + suffix;

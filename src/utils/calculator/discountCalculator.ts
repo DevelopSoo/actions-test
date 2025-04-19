@@ -9,7 +9,7 @@ const applyPriceDiscount = (price: number) => {
 };
 
 // 회원 등급별 추가 할인 적용: 실버 2%, 골드 5%, VIP 10%
-export type Membership = "regular" | "silver" | "gold" | "vip";
+export type Membership = 'regular' | 'silver' | 'gold' | 'vip';
 
 const applyMembershipDiscount = (price: number, membership: Membership) => {
   const discountRates = {
@@ -23,7 +23,7 @@ const applyMembershipDiscount = (price: number, membership: Membership) => {
 
 // 쿠폰 할인 적용: 정액(고정 금액) 또는 정률(비율) 할인
 export type Coupon = {
-  type: "fixed" | "percentage";
+  type: 'fixed' | 'percentage';
   value: number;
 };
 
@@ -31,9 +31,9 @@ const applyCouponDiscount = (price: number, coupon?: Coupon) => {
   // coupon이 없는 경우, 할인 없음
   if (!coupon) return price;
   // 정액 쿠폰인 경우, 가격에서 쿠폰 값을 빼줌
-  if (coupon.type === "fixed") return price - coupon.value;
+  if (coupon.type === 'fixed') return price - coupon.value;
   // 정률 쿠폰인 경우, 가격에서 쿠폰 값을 곱해줌
-  if (coupon.type === "percentage") return price * (1 - coupon.value / 100);
+  if (coupon.type === 'percentage') return price * (1 - coupon.value / 100);
   return price;
 };
 

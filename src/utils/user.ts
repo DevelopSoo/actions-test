@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 
 export function fetchUserById(id: string) {
   // 실제 API를 호출하여 DB로부터 데이터를 가져오는 코드라고 가정
   const userInfo = {
     id,
-    name: "김철수",
-    email: "kim@example.com",
+    name: '김철수',
+    email: 'kim@example.com',
   };
 
   return userInfo;
@@ -18,7 +18,7 @@ export function getUserResponseById(id: string) {
   // 추가 작업 -> 실제로는 이 과정이 잘 되는지 확인하고 싶음
   return {
     success: true,
-    message: "유저 정보를 성공적으로 조회했습니다",
+    message: '유저 정보를 성공적으로 조회했습니다',
     data: user,
   };
 }

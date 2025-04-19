@@ -1,8 +1,8 @@
 const mockUser = (id: number) => {
   return {
     id,
-    name: "김철수",
-    email: "kim@example.com",
+    name: '김철수',
+    email: 'kim@example.com',
   };
 };
 

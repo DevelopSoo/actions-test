@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 function Button({
   children,
@@ -11,7 +11,7 @@ function Button({
 }) {
   return (
     <button
-      className="bg-blue-400 px-4 py-2 rounded-md text-white cursor-pointer"
+      className="cursor-pointer rounded-md bg-blue-400 px-4 py-2 text-white"
       onClick={onClick}
       disabled={disabled}
     >

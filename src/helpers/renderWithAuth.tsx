@@ -1,12 +1,12 @@
 // src/helpers/renderWithAuth.tsx
 
-import { render } from "@testing-library/react";
+import { render } from '@testing-library/react';
 import {
   AuthProvider,
   AuthContext,
   AuthContextType,
-} from "@/contexts/AuthContext";
-import { ReactElement } from "react";
+} from '@/contexts/AuthContext';
+import { ReactElement } from 'react';
 
 // 기본 AuthContext 값 정의
 const defaultAuthValue: AuthContextType = {
