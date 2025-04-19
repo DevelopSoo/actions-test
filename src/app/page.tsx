@@ -66,6 +66,7 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-4 p-4">
       <h1 className="text-2xl font-bold">게시글 목록</h1>
+      <p>환경: {process.env.NEXT_PUBLIC_MY_ENVIRONMENT}</p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <input
