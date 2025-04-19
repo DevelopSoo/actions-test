@@ -1,33 +1,33 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
+import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 
-import { Button } from "./Button";
+import { Button } from './Button';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Example/Button",
+  title: 'Example/Button',
   component: Button,
   parameters: {
     // 컴포넌트를 가운데에 배치
-    layout: "centered",
+    layout: 'centered',
     backgrounds: {
       values: [
         {
-          name: "red",
-          value: "red",
+          name: 'red',
+          value: 'red',
         },
         {
-          name: "blue",
-          value: "blue",
+          name: 'blue',
+          value: 'blue',
         },
       ],
     },
   },
   // 자동으로 문서를 만들어주는 기능
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   // 컴포넌트의 속성을 제어하는 기능
   argTypes: {
-    backgroundColor: { control: "color" },
+    backgroundColor: { control: 'color' },
   },
   // 클릭 이벤트를 스파이하는 기능
   args: { onClick: fn() },
@@ -40,26 +40,26 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     primary: true,
-    label: "Button",
+    label: 'Button',
   },
 };
 
 export const Secondary: Story = {
   args: {
-    label: "Button",
+    label: 'Button',
   },
 };
 
 export const Large: Story = {
   args: {
-    size: "large",
-    label: "Button",
+    size: 'large',
+    label: 'Button',
   },
 };
 
 export const Small: Story = {
   args: {
-    size: "small",
-    label: "Button",
+    size: 'small',
+    label: 'Button',
   },
 };

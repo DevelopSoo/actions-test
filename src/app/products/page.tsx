@@ -1,7 +1,7 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default async function ProductsPage() {
-  const products = await fetch("https://fakestoreapi.com/products");
+  const products = await fetch('https://fakestoreapi.com/products');
   const productsData = await products.json();
   return (
     <div>
@@ -16,7 +16,7 @@ export default async function ProductsPage() {
             image: string;
           }) => (
             <Link
-              className="w-64 h-auto border"
+              className="h-auto w-64 border"
               key={product.id}
               href={`/products/${product.id}`}
               data-testid={`product-${product.id}`}

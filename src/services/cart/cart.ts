@@ -27,13 +27,13 @@ class Cart {
 
   updateQuantity(itemId: string, quantity: number) {
     if (quantity < 1) {
-      throw new Error("수량은 1보다 작을 수 없습니다.");
+      throw new Error('수량은 1보다 작을 수 없습니다.');
     }
 
     const item = this.items.find((i) => i.id === itemId);
 
     if (!item) {
-      throw new Error("존재하지 않는 상품입니다.");
+      throw new Error('존재하지 않는 상품입니다.');
     }
 
     item.quantity = quantity;

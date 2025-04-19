@@ -1,12 +1,12 @@
 // src/components/LoginForm.tsx
 
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function EnhancedLoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,7 +49,7 @@ export default function EnhancedLoginForm() {
         </label>
       </div>
 
-      <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">
+      <button className="rounded-md bg-blue-500 p-2 text-white" type="submit">
         로그인
       </button>
     </form>

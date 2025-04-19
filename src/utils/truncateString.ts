@@ -3,5 +3,5 @@ export default function truncateString(str: string, maxLength: number) {
     return str;
   }
 
-  return str.slice(0, maxLength - 3) + "...";
+  return str.slice(0, maxLength - 3) + '...';
 }

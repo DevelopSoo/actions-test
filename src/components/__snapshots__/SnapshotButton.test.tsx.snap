@@ -23,7 +23,7 @@ exports[`Button 컴포넌트가 올바르게 렌더링됩니다. 로딩 상태 1
 exports[`Button 컴포넌트가 올바르게 렌더링됩니다. 비활성화 상태 1`] = `
 <div>
   <button
-    class="bg-blue-500 opacity-50 cursor-not-allowed "
+    class="bg-blue-500 cursor-not-allowed opacity-50 "
   >
     클릭
   </button>

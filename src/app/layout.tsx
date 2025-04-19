@@ -1,7 +1,7 @@
-import "./globals.css";
-import Providers from "@/providers/Providers";
+import './globals.css';
+import Providers from '@/providers/Providers';
 
-import("@/mocks/index").then((res) => res.initMsw());
+import('@/mocks/index').then((res) => res.initMsw());
 
 export default function RootLayout({
   children,

@@ -1,16 +1,16 @@
 // src/helpers/renderWithTheme.tsx
 
-import { render } from "@testing-library/react";
+import { render } from '@testing-library/react';
 import {
   ThemeContext,
   ThemeContextType,
   ThemeProvider,
-} from "@/contexts/ThemeContext";
-import { ReactElement } from "react";
+} from '@/contexts/ThemeContext';
+import { ReactElement } from 'react';
 
 // 기본 ThemeContext 값 정의
 const defaultThemeValue: ThemeContextType = {
-  theme: "light",
+  theme: 'light',
   toggleTheme: () => {},
 };
 

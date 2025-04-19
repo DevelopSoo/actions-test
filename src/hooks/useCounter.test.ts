@@ -1,8 +1,8 @@
-import { act, renderHook } from "@testing-library/react";
-import useCounter from "./useCounter";
+import { act, renderHook } from '@testing-library/react';
+import useCounter from './useCounter';
 
-describe("useCounter 훅 테스트", () => {
-  test("초기값이 올바르게 설정된다", () => {
+describe('useCounter 훅 테스트', () => {
+  test('초기값이 올바르게 설정된다', () => {
     // 1. renderHook 함수의 인자로 useCounter 훅을 전달합니다.
     const { result } = renderHook(() => useCounter(5));
     // 2. result의 내부에 useCounter 훅이 반환하는 객체(current)가 존재하며,
@@ -10,7 +10,7 @@ describe("useCounter 훅 테스트", () => {
     expect(result.current.count).toBe(5);
   });
 
-  test("increment 함수를 호출하면 count가 1 증가한다", () => {
+  test('increment 함수를 호출하면 count가 1 증가한다', () => {
     const { result } = renderHook(() => useCounter(0));
 
     // 3. 훅의 함수를 호출하여 상태를 변경합니다.
@@ -23,7 +23,7 @@ describe("useCounter 훅 테스트", () => {
     expect(result.current.count).toBe(1);
   });
 
-  test("decrement 함수를 호출하면 count가 1 감소한다", () => {
+  test('decrement 함수를 호출하면 count가 1 감소한다', () => {
     const { result } = renderHook(() => useCounter(1));
 
     act(() => {
@@ -33,7 +33,7 @@ describe("useCounter 훅 테스트", () => {
     expect(result.current.count).toBe(0);
   });
 
-  test("reset 함수를 호출하면 count가 초기값으로 초기화된다", () => {
+  test('reset 함수를 호출하면 count가 초기값으로 초기화된다', () => {
     const { result } = renderHook(() => useCounter(10));
 
     act(() => {
@@ -44,7 +44,7 @@ describe("useCounter 훅 테스트", () => {
     expect(result.current.count).toBe(10);
   });
 
-  test("double 함수를 호출하면 count가 2배로 증가한다", () => {
+  test('double 함수를 호출하면 count가 2배로 증가한다', () => {
     const { result } = renderHook(() => useCounter(5));
 
     act(() => {

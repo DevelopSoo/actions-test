@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 const client = axios.create({
-  baseURL: "https://www.example.com",
+  baseURL: 'https://www.example.com',
 });
 
 type ErrorType = {
@@ -18,7 +18,7 @@ const handleError = (error: ErrorType) => {
   if (error.response) {
     // 서버에서 오류 응답을 받은 경우
     const status = error.response.status;
-    const message = error.response.data.message || "API 오류";
+    const message = error.response.data.message || 'API 오류';
 
     if (status === 404) {
       throw new Error(`리소스를 찾을 수 없습니다: ${message}`);
@@ -29,7 +29,7 @@ const handleError = (error: ErrorType) => {
     }
   } else if (error.request) {
     // 요청은 보냈으나 응답을 받지 못한 경우
-    throw new Error("서버 응답 없음");
+    throw new Error('서버 응답 없음');
   } else {
     // 요청 설정 중 오류가 발생한 경우
     throw new Error(`요청 오류: ${error.message}`);
@@ -38,7 +38,7 @@ const handleError = (error: ErrorType) => {
 
 export const getUsers = async () => {
   try {
-    const response = await client.get("/users");
+    const response = await client.get('/users');
     return response.data;
   } catch (error) {
     handleError(error as ErrorType);
@@ -47,7 +47,7 @@ export const getUsers = async () => {
 
 export const createUser = async (userData: { name: string; email: string }) => {
   try {
-    const response = await client.post("/users", userData);
+    const response = await client.post('/users', userData);
     return response.data;
   } catch (error) {
     handleError(error as ErrorType);

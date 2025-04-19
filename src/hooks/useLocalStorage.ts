@@ -1,5 +1,5 @@
 // hooks/useLocalStorage.ts
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 function useLocalStorage<T>(
   key: string,
@@ -10,7 +10,7 @@ function useLocalStorage<T>(
       const item = localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-      console.error("로컬스토리지 읽기 오류:", error);
+      console.error('로컬스토리지 읽기 오류:', error);
       return initialValue;
     }
   });
@@ -20,7 +20,7 @@ function useLocalStorage<T>(
       setStoredValue(value);
       localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-      console.error("로컬스토리지 쓰기 오류:", error);
+      console.error('로컬스토리지 쓰기 오류:', error);
     }
   };
 
@@ -32,13 +32,13 @@ function useLocalStorage<T>(
         try {
           setStoredValue(JSON.parse(e.newValue));
         } catch (error) {
-          console.error("로컬스토리지 동기화 오류:", error);
+          console.error('로컬스토리지 동기화 오류:', error);
         }
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, [key]);
 
   return [storedValue, setValue];

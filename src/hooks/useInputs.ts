@@ -1,5 +1,5 @@
 // hooks/useInputs.ts
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent } from 'react';
 
 interface FormValues {
   [key: string]: string;

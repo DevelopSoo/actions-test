@@ -1,9 +1,9 @@
 // contexts/ThemeContext.tsx
-"use client";
-import { createContext, useContext, useState, ReactNode } from "react";
+'use client';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface ThemeContextType {
-  theme: "light" | "dark";
+  theme: 'light' | 'dark';
   toggleTheme: () => void;
 }
 
@@ -12,10 +12,10 @@ export const ThemeContext = createContext<ThemeContextType | undefined>(
 );
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
   return (
@@ -28,7 +28,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error("useTheme 는 ThemeProvider 내부에서 사용되어야 합니다.");
+    throw new Error('useTheme 는 ThemeProvider 내부에서 사용되어야 합니다.');
   }
   return context;
 };

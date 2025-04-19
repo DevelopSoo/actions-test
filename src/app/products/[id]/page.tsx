@@ -1,8 +1,9 @@
 // src/app/products/[id]/page.tsx
 
-"use client";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+'use client';
+import { useParams, useRouter } from 'next/navigation';
+import * as Sentry from '@sentry/nextjs';
+import { useEffect, useState } from 'react';
 
 export default function ProductPage() {
   const router = useRouter();
@@ -34,17 +35,16 @@ export default function ProductPage() {
       {isLoading ? (
         <div>로딩중</div>
       ) : (
-        <div className="w-78 h-auto border">
+        <div className="h-auto w-78 border">
           <img className="w-78" src={product?.image} alt={product?.title} />
           <h1>{product?.title}</h1>
           <p>{product?.price}</p>
           <p>{product?.description}</p>
         </div>
       )}
-
       <div className="flex items-center gap-4">
         <button
-          className="border px-4 py-2 rounded-md bg-gray-200"
+          className="rounded-md border bg-gray-200 px-4 py-2"
           onClick={() => {
             if (count > 0) {
               setCount(count - 1);
@@ -55,20 +55,39 @@ export default function ProductPage() {
         </button>
         <span className="text-2xl font-bold">{count}</span>
         <button
-          className="border px-4 py-2 rounded-md bg-gray-200"
+          className="rounded-md border bg-gray-200 px-4 py-2"
           onClick={() => setCount(count + 1)}
         >
           +
         </button>
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          className="rounded-md bg-blue-500 px-4 py-2 text-white"
           onClick={() => {
-            router.push("/purchase/complete");
+            router.push('/purchase/complete');
           }}
         >
           구매
         </button>
       </div>
+      <button
+        type="button"
+        onClick={async () => {
+          await Sentry.startSpan(
+            {
+              name: '제바알',
+              op: '23123',
+            },
+            async () => {
+              const res = await fetch('/api/sentry-example-api');
+              if (!res.ok) {
+                throw new Error('하하하하');
+              }
+            }
+          );
+        }}
+      >
+        <span>Throw Sample Error</span>
+      </button>
     </div>
   );
 }

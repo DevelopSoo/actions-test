@@ -1,8 +1,8 @@
-import { test } from "@playwright/test";
+import { test } from '@playwright/test';
 
-test.describe("상품 페이지 테스트", () => {
+test.describe('상품 페이지 테스트', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:3000/products");
+    await page.goto('http://localhost:3000/products');
   });
 
   // 장바구니 담기 버튼을 가져온다.

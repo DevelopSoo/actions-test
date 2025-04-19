@@ -1,5 +1,5 @@
 // hooks/useCounter.ts
-import { useState } from "react";
+import { useState } from 'react';
 
 interface CounterState {
   count: number;
