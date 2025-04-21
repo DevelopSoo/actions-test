@@ -13,7 +13,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`antialiased`}>
         <Providers>{children}</Providers>
-        <SpeedInsights />
+        {process.env.NODE_ENV !== 'development' && <SpeedInsights />}
       </body>
     </html>
   );

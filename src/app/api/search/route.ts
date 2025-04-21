@@ -3,6 +3,7 @@
 import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest) {
+  throw new Error('검색 에러');
   const searchParams = req.nextUrl.searchParams;
   const q = searchParams.get('q');
 
