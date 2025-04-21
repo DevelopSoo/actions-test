@@ -54,6 +54,8 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: DevelopSoo/actions-test
+          files: ./coverage/lcov.info
+          fail_ci_if_error: true
 
       # - name: Extract coverage data
       #   id: coverage
