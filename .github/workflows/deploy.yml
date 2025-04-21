@@ -49,39 +49,45 @@ jobs:
       - name: Run tests with coverage
         run: npm test -- --coverage
 
-      - name: Extract coverage data
-        id: coverage
-        run: |
-          # 다양한 커버리지 지표 추출
-          STATEMENTS=$(cat coverage/coverage-summary.json | jq -r '.total.statements.pct')
-          BRANCHES=$(cat coverage/coverage-summary.json | jq -r '.total.branches.pct')
-          FUNCTIONS=$(cat coverage/coverage-summary.json | jq -r '.total.functions.pct')
-          LINES=$(cat coverage/coverage-summary.json | jq -r '.total.lines.pct')
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: DevelopSoo/actions-test
 
-          # 출력 설정
-          echo "statements=$STATEMENTS" >> $GITHUB_OUTPUT
-          echo "branches=$BRANCHES" >> $GITHUB_OUTPUT
-          echo "functions=$FUNCTIONS" >> $GITHUB_OUTPUT
-          echo "lines=$LINES" >> $GITHUB_OUTPUT
+      # - name: Extract coverage data
+      #   id: coverage
+      #   run: |
+      #     # 다양한 커버리지 지표 추출
+      #     STATEMENTS=$(cat coverage/coverage-summary.json | jq -r '.total.statements.pct')
+      #     BRANCHES=$(cat coverage/coverage-summary.json | jq -r '.total.branches.pct')
+      #     FUNCTIONS=$(cat coverage/coverage-summary.json | jq -r '.total.functions.pct')
+      #     LINES=$(cat coverage/coverage-summary.json | jq -r '.total.lines.pct')
 
-      - name: Comment PR
-        if: github.event_name == 'pull_request'
-        run: |
-          # 각 커버리지 지표
-          STATEMENTS="${{ steps.coverage.outputs.statements }}"
-          BRANCHES="${{ steps.coverage.outputs.branches }}"
-          FUNCTIONS="${{ steps.coverage.outputs.functions }}"
-          LINES="${{ steps.coverage.outputs.lines }}"
+      #     # 출력 설정
+      #     echo "statements=$STATEMENTS" >> $GITHUB_OUTPUT
+      #     echo "branches=$BRANCHES" >> $GITHUB_OUTPUT
+      #     echo "functions=$FUNCTIONS" >> $GITHUB_OUTPUT
+      #     echo "lines=$LINES" >> $GITHUB_OUTPUT
 
-          gh pr comment ${{ github.event.pull_request.number }} --body "## 코드 커버리지 리포트 📊
+      # - name: Comment PR
+      #   if: github.event_name == 'pull_request'
+      #   run: |
+      #     # 각 커버리지 지표
+      #     STATEMENTS="${{ steps.coverage.outputs.statements }}"
+      #     BRANCHES="${{ steps.coverage.outputs.branches }}"
+      #     FUNCTIONS="${{ steps.coverage.outputs.functions }}"
+      #     LINES="${{ steps.coverage.outputs.lines }}"
 
-          | 지표 | 커버리지 |
-          | --- | --- |
-          | 구문(Statements) | ${STATEMENTS}% |
-          | 분기(Branches) | ${BRANCHES}% |
-          | 함수(Functions) | ${FUNCTIONS}% |
-          | 라인(Lines) | ${LINES}% |
+      #     gh pr comment ${{ github.event.pull_request.number }} --body "## 코드 커버리지 리포트 📊
 
-          [자세한 리포트 보기](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     | 지표 | 커버리지 |
+      #     | --- | --- |
+      #     | 구문(Statements) | ${STATEMENTS}% |
+      #     | 분기(Branches) | ${BRANCHES}% |
+      #     | 함수(Functions) | ${FUNCTIONS}% |
+      #     | 라인(Lines) | ${LINES}% |
+
+      #     [자세한 리포트 보기](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
