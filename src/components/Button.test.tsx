@@ -4,10 +4,10 @@ import userEvent from '@testing-library/user-event';
 
 test('버튼이 화면에 표시되는지 확인', () => {
   // 버튼 렌더링
-  render(<Button onClick={() => {}}>버튼 내용</Button>);
+  render(<Button onClick={() => {}}>버튼내용</Button>);
 
   // 버튼 텍스트가 화면에 표시되는지 확인
-  const button = screen.getByText('버튼 내용');
+  const button = screen.getByText('버튼내용');
   expect(button).toBeInTheDocument();
 });
 
