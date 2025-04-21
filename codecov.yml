@@ -1,23 +1,18 @@
-codecov:
-  require_ci_to_pass: yes
-  token: 48801ecb-9e80-4b65-9b3c-53ad8d08c814
-
 coverage:
   status:
-    project:
+    project: #add everything under here, more options at https://docs.codecov.com/docs/commit-status
       default:
-        target: auto
-        threshold: 0%
-        base: auto
-        informational: true
-    patch:
-      default:
-        informational: true
+        # basic
+        target: auto # 커버리지 목표치를 자동으로 설정
+        threshold: 0% # 허용되는 커버리지 변동 범위
+        base: auto # 비교 기준이 되는 브랜치/커밋
+        flags:
+          - all_files # 모든 파일에 대한 커버리지 체크
 
 comment:
-  layout: 'condensed_header, condensed_files, condensed_footer'
-  behavior: new
-  require_changes: false
-  require_base: false
-  require_head: true
-  hide_project_coverage: false
+  layout: 'diff, flags, files' # PR 코멘트에 표시할 내용 구성
+  behavior: default # 코멘트 동작 방식
+  require_changes: false # 커버리지 변경이 있을 때만 코멘트 달지 여부
+  require_base: true # base 브랜치의 커버리지 리포트가 필요한지 여부
+  require_head: true # PR 브랜치의 커버리지 리포트가 필요한지 여부
+  hide_project_coverage: false # 전체 프로젝트 커버리지를 숨길지 여부

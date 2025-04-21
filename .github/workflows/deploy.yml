@@ -50,12 +50,10 @@ jobs:
         run: npm run test:coverage
 
       - name: Upload results to Codecov
-        uses: codecov/codecov-action@v4.0.1
+        uses: codecov/codecov-action@v5
         with:
-          token: 48801ecb-9e80-4b65-9b3c-53ad8d08c814
+          token: ${{ secrets.CODECOV_TOKEN }}
           slug: DevelopSoo/actions-test
-          files: ./coverage/lcov.info
-          fail_ci_if_error: true
 
       # - name: Extract coverage data
       #   id: coverage
