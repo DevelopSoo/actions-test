@@ -5,6 +5,10 @@ coverage:
         target: auto
         threshold: 0%
         base: auto
+        informational: true
+    patch:
+      default:
+        informational: true
 
 comment:
   layout: 'condensed_header, condensed_files, condensed_footer'
