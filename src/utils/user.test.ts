@@ -1,6 +1,6 @@
 jest.mock('axios');
 import axios from 'axios';
-import { fetchUserById, fetchUserData } from './user';
+import { fetchUserById, fetchUserData, getUserResponseById } from './user';
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
@@ -77,5 +77,18 @@ test('fetchUserById 테스트', () => {
     id: '1',
     name: '김철수',
     email: 'kim@example.com',
+  });
+});
+
+test('getUserResponseById 테스트', () => {
+  const user = getUserResponseById('1');
+  expect(user).toEqual({
+    success: true,
+    message: '유저 정보를 성공적으로 조회했습니다',
+    data: {
+      id: '1',
+      name: '김철수',
+      email: 'kim@example.com',
+    },
   });
 });
