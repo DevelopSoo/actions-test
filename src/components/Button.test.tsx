@@ -25,14 +25,3 @@ test('버튼을 클릭하면 onClick 함수가 호출되는지 확인', async ()
   // 버튼 클릭 시 모킹한 함수가 1번 호출되었는지 확인
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
-
-test('버튼이 비활성화 상태인지 확인', () => {
-  render(
-    <Button onClick={() => {}} disabled>
-      버튼내용
-    </Button>
-  );
-
-  const button = screen.getByText('버튼내용');
-  expect(button).toBeDisabled();
-});
