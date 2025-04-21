@@ -1,3 +1,7 @@
+codecov:
+  require_ci_to_pass: yes
+  token: 48801ecb-9e80-4b65-9b3c-53ad8d08c814
+
 coverage:
   status:
     project:

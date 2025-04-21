@@ -52,7 +52,7 @@ jobs:
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v5
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: 48801ecb-9e80-4b65-9b3c-53ad8d08c814
           slug: DevelopSoo/actions-test
           files: ./coverage/lcov.info
           fail_ci_if_error: true
