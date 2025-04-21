@@ -50,7 +50,7 @@ jobs:
         run: npm run test:coverage
 
       - name: Upload results to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v4.0.1
         with:
           token: 48801ecb-9e80-4b65-9b3c-53ad8d08c814
           slug: DevelopSoo/actions-test
