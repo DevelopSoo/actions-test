@@ -1,6 +1,6 @@
 jest.mock('axios');
 import axios from 'axios';
-import { fetchUserData } from './user';
+import { fetchUserById, fetchUserData } from './user';
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
@@ -69,4 +69,13 @@ test('유저 객체의 속성을 직접 검사하기', () => {
 
   expect(user.password.length).toBeGreaterThanOrEqual(8);
   expect(user.name.length).toBeGreaterThanOrEqual(2);
+});
+
+test('fetchUserById 테스트', () => {
+  const user = fetchUserById('1');
+  expect(user).toEqual({
+    id: '1',
+    name: '김철수',
+    email: 'kim@example.com',
+  });
 });
