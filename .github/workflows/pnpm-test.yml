@@ -27,9 +27,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ~/.pnpm-store
+            ~/.local/share/pnpm/store
             node_modules
-            .pnpm-store
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
@@ -49,12 +48,18 @@ jobs:
           echo "pnpm-lock.yaml 해시: ${{ hashFiles('**/pnpm-lock.yaml') }}"
           echo "캐시 키: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}"
           echo "캐시 상태: ${{ steps.pnpm-cache.outputs.cache-hit }}"
+          echo "=== pnpm store path ==="
+          pnpm store path
           echo "=== 디렉토리 구조 ==="
           ls -la
-          echo "=== pnpm-store 확인 ==="
-          ls -la ~/.pnpm-store || echo "pnpm-store 없음"
+          echo "=== pnpm store 확인 ==="
+          ls -la ~/.local/share/pnpm/store || echo "pnpm store 없음"
           echo "=== node_modules 확인 ==="
           ls -la node_modules || echo "node_modules 없음"
+
+      - name: pnpm 캐시 위치 확인
+        run: |
+          pnpm store path
 
       - name: pnpm 설치 및 빌드 시간 측정
         run: |
