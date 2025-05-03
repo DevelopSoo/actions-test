@@ -1,0 +1,50 @@
+name: pnpm 성능 테스트
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pnpm-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node.js 설치
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: pnpm 설치
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: pnpm 캐시 설정
+        id: pnpm-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: 캐시 상태 출력
+        run: |
+          if [[ "${{ steps.pnpm-cache.outputs.cache-hit }}" == 'true' ]]; then
+            echo "캐시 히트: true"
+          else
+            echo "캐시 히트: false"
+          fi
+
+      - name: pnpm 설치 및 빌드 시간 측정
+        run: |
+          echo "=== pnpm 테스트 시작 ==="
+          echo "캐시 상태: ${{ steps.pnpm-cache.outputs.cache-hit }}"
+          echo "pnpm install 시작"
+          time pnpm install
+          echo "pnpm run build 시작"
+          time pnpm run build
+          echo "=== pnpm 테스트 종료 ==="
