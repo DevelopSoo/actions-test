@@ -16,7 +16,6 @@ export default function Home() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      // try catch 문도 추가하면 좋겠네요.
       const res = await fetch('/api/posts');
       if (!res.ok) {
         alert('게시물 데이터 요청 실패');
