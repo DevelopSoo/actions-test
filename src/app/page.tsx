@@ -15,6 +15,7 @@ export default function Home() {
   const [values, setValues] = useState({ title: '', content: '' });
 
   useEffect(() => {
+    console.log('useEffect');
     const fetchPosts = async () => {
       // try catch 문도 추가하면 좋겠네요.
       const res = await fetch('/api/posts');
