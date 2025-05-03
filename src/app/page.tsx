@@ -15,6 +15,7 @@ export default function Home() {
   const [values, setValues] = useState({ title: '', content: '' });
 
   useEffect(() => {
+    console.log('useEffect');
     const fetchPosts = async () => {
       const res = await fetch('/api/posts');
       if (!res.ok) {
