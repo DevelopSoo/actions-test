@@ -1,93 +1,93 @@
-# Workflow의 이름
-# Workflow : 하나의 yml 파일을 하나의 Workflow라고 부른다.
-name: Github Actions 연습하기
+# # Workflow의 이름
+# # Workflow : 하나의 yml 파일을 하나의 Workflow라고 부른다.
+# name: Github Actions 연습하기
 
-# Event : 실행되는 시점을 설정
-# main이라는 브랜치에 push 될 때 아래 Workflow를 실행
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - '**'
+# # Event : 실행되는 시점을 설정
+# # main이라는 브랜치에 push 될 때 아래 Workflow를 실행
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     types: [opened, synchronize, reopened]
+#     branches:
+#       - '**'
 
-# PR에 댓글을 달려면 권한 설정 필요
-permissions:
-  contents: read
-  pull-requests: write
+# # PR에 댓글을 달려면 권한 설정 필요
+# permissions:
+#   contents: read
+#   pull-requests: write
 
-# concurrency 설정 추가
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }} # 워크플로우 이름과 브랜치 이름을 그룹으로 묶어서 실행
-  cancel-in-progress: true # 이미 실행 중인 이전 워크플로우를 취소합니다
+# # concurrency 설정 추가
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.ref }} # 워크플로우 이름과 브랜치 이름을 그룹으로 묶어서 실행
+#   cancel-in-progress: true # 이미 실행 중인 이전 워크플로우를 취소합니다
 
-# 하나의 Workflow는 1개 이상의 Job으로 구성된다.
-# 여러 Job은 기본적으로 병렬적으로 수행된다.
-jobs:
-  # Job을 식별하기 위한 id -> 이름은 자유롭게 작성
+# # 하나의 Workflow는 1개 이상의 Job으로 구성된다.
+# # 여러 Job은 기본적으로 병렬적으로 수행된다.
+# jobs:
+#   # Job을 식별하기 위한 id -> 이름은 자유롭게 작성
 
-  my-job:
-    # Github Actions를 실행시킬 서버 종류 선택
-    runs-on: ubuntu-latest
+#   my-job:
+#     # Github Actions를 실행시킬 서버 종류 선택
+#     runs-on: ubuntu-latest
 
-    # Step : 특정 작업을 수행하는 가장 작은 단위
-    # Job은 여러 Step들로 구성되어 있다.
-    steps:
-      - name: Github Repository 파일 가져오기
-        uses: actions/checkout@v4
+#     # Step : 특정 작업을 수행하는 가장 작은 단위
+#     # Job은 여러 Step들로 구성되어 있다.
+#     steps:
+#       - name: Github Repository 파일 가져오기
+#         uses: actions/checkout@v4
 
-      - name: Node 설치
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+#       - name: Node 설치
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
 
-      - name: 의존성(라이브러리) 설치
-        run: npm ci
+#       - name: 의존성(라이브러리) 설치
+#         run: npm ci
 
-      - name: Run tests with coverage
-        run: npm run test:coverage
+#       - name: Run tests with coverage
+#         run: npm run test:coverage
 
-      - name: Upload results to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: DevelopSoo/actions-test
+#       - name: Upload results to Codecov
+#         uses: codecov/codecov-action@v5
+#         with:
+#           token: ${{ secrets.CODECOV_TOKEN }}
+#           slug: DevelopSoo/actions-test
 
-      # - name: Extract coverage data
-      #   id: coverage
-      #   run: |
-      #     # 다양한 커버리지 지표 추출
-      #     STATEMENTS=$(cat coverage/coverage-summary.json | jq -r '.total.statements.pct')
-      #     BRANCHES=$(cat coverage/coverage-summary.json | jq -r '.total.branches.pct')
-      #     FUNCTIONS=$(cat coverage/coverage-summary.json | jq -r '.total.functions.pct')
-      #     LINES=$(cat coverage/coverage-summary.json | jq -r '.total.lines.pct')
+#       # - name: Extract coverage data
+#       #   id: coverage
+#       #   run: |
+#       #     # 다양한 커버리지 지표 추출
+#       #     STATEMENTS=$(cat coverage/coverage-summary.json | jq -r '.total.statements.pct')
+#       #     BRANCHES=$(cat coverage/coverage-summary.json | jq -r '.total.branches.pct')
+#       #     FUNCTIONS=$(cat coverage/coverage-summary.json | jq -r '.total.functions.pct')
+#       #     LINES=$(cat coverage/coverage-summary.json | jq -r '.total.lines.pct')
 
-      #     # 출력 설정
-      #     echo "statements=$STATEMENTS" >> $GITHUB_OUTPUT
-      #     echo "branches=$BRANCHES" >> $GITHUB_OUTPUT
-      #     echo "functions=$FUNCTIONS" >> $GITHUB_OUTPUT
-      #     echo "lines=$LINES" >> $GITHUB_OUTPUT
+#       #     # 출력 설정
+#       #     echo "statements=$STATEMENTS" >> $GITHUB_OUTPUT
+#       #     echo "branches=$BRANCHES" >> $GITHUB_OUTPUT
+#       #     echo "functions=$FUNCTIONS" >> $GITHUB_OUTPUT
+#       #     echo "lines=$LINES" >> $GITHUB_OUTPUT
 
-      # - name: Comment PR
-      #   if: github.event_name == 'pull_request'
-      #   run: |
-      #     # 각 커버리지 지표
-      #     STATEMENTS="${{ steps.coverage.outputs.statements }}"
-      #     BRANCHES="${{ steps.coverage.outputs.branches }}"
-      #     FUNCTIONS="${{ steps.coverage.outputs.functions }}"
-      #     LINES="${{ steps.coverage.outputs.lines }}"
+#       # - name: Comment PR
+#       #   if: github.event_name == 'pull_request'
+#       #   run: |
+#       #     # 각 커버리지 지표
+#       #     STATEMENTS="${{ steps.coverage.outputs.statements }}"
+#       #     BRANCHES="${{ steps.coverage.outputs.branches }}"
+#       #     FUNCTIONS="${{ steps.coverage.outputs.functions }}"
+#       #     LINES="${{ steps.coverage.outputs.lines }}"
 
-      #     gh pr comment ${{ github.event.pull_request.number }} --body "## 코드 커버리지 리포트 📊
+#       #     gh pr comment ${{ github.event.pull_request.number }} --body "## 코드 커버리지 리포트 📊
 
-      #     | 지표 | 커버리지 |
-      #     | --- | --- |
-      #     | 구문(Statements) | ${STATEMENTS}% |
-      #     | 분기(Branches) | ${BRANCHES}% |
-      #     | 함수(Functions) | ${FUNCTIONS}% |
-      #     | 라인(Lines) | ${LINES}% |
+#       #     | 지표 | 커버리지 |
+#       #     | --- | --- |
+#       #     | 구문(Statements) | ${STATEMENTS}% |
+#       #     | 분기(Branches) | ${BRANCHES}% |
+#       #     | 함수(Functions) | ${FUNCTIONS}% |
+#       #     | 라인(Lines) | ${LINES}% |
 
-      #     [자세한 리포트 보기](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       #     [자세한 리포트 보기](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+#       #   env:
+#       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

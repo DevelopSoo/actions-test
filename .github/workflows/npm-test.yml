@@ -1,0 +1,45 @@
+name: npm 성능 테스트
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  npm-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node.js 설치
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: npm 캐시 설정
+        id: npm-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: 캐시 상태 출력
+        run: |
+          if [[ "${{ steps.npm-cache.outputs.cache-hit }}" == 'true' ]]; then
+            echo "캐시 히트: true"
+          else
+            echo "캐시 히트: false"
+          fi
+
+      - name: npm 설치 및 빌드 시간 측정
+        run: |
+          echo "=== npm 테스트 시작 ==="
+          echo "캐시 상태: ${{ steps.npm-cache.outputs.cache-hit }}"
+          echo "npm install 시작"
+          time npm install
+          echo "npm run build 시작"
+          time npm run build
+          echo "=== npm 테스트 종료 ==="
