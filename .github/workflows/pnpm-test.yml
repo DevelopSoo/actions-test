@@ -75,5 +75,5 @@ jobs:
         run: |
           pnpm install
           echo "=== 설치 후 캐시 상태 ==="
-          ls -la ~/.pnpm-store
-          du -sh ~/.pnpm-store
+          ls -la ~/.local/share/pnpm/store
+          du -sh ~/.local/share/pnpm/store
