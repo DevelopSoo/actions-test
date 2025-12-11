@@ -62,9 +62,5 @@ export default function Home() {
     setData(data.filter((post) => post.id !== id));
   };
 
-  return (
-    <div>
-      1
-    </div>
-  );
+  return <div>1123</div>;
 }
